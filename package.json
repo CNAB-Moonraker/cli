@@ -1,0 +1,29 @@
+{
+  "name": "@moonraker/cli",
+  "version": "1.0.0",
+  "description": "CLI to install and run the express server REST API that ingests and processes the claims",
+  "main": "bin/index.js",
+  "bin": {
+    "moonraker": "bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CNAB-Moonraker/cli.git"
+  },
+  "keywords": [
+    "CLI",
+    "npm",
+    "NodeJS",
+    "Express",
+    "CNAB"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CNAB-Moonraker/cli/issues"
+  },
+  "homepage": "https://github.com/CNAB-Moonraker/cli#readme"
+}
