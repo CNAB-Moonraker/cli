@@ -1,14 +1,44 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk');
-const moonraker = require('commander');
+const didYouMean = require('didyoumean');
+const program = require('commander');
+const { logo, runServer } = require('../utils');
 
-moonraker
-  .command('hello')
-  .option('-n, --name <name>', 'Pass a variable to the CLI.')
-  .action((name="from my CLI") => {
-    console.log(chalk.cyan(`Hello ${name}!`));
+program
+  .name('moonraker')
+  .version('0.0.0')
+  .usage('command')
+
+program
+  .command('run')
+  .option('-p, --port <port>', 'Optional Port Parameter - Defaults to 3002')
+  .action(runServer)
+
+
+// Handle unknown command
+program
+  .arguments('<command>')
+  .action((cmd) => {
+    program.outputHelp()
+    console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`))
+    console.log()
+    suggestCommands(cmd)
   })
-  
 
-moonraker.parse(process.argv)
+program.parse(process.argv)
+
+// Output help command if no command given
+if (!process.argv.slice(2).length) {
+  logo()
+  program.outputHelp()
+}
+
+function suggestCommands (unknownCommand) {
+  const availableCommands = program.commands.map(cmd => cmd._name)
+
+  const suggestion = didYouMean(unknownCommand, availableCommands)
+  if (suggestion) {
+    console.log(`  ` + chalk.red(`Did you mean ${chalk.yellow(suggestion)}?`))
+  }
+}
