@@ -7,7 +7,7 @@ const { logo, runServer } = require('../utils');
 
 program
   .name('moonraker')
-  .version('0.0.0')
+  .version(require('../package.json').version)
   .usage('command')
 
 program

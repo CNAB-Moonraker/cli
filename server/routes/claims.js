@@ -23,19 +23,18 @@ fs.readdir(porterDir, (err, data) => {
     });
 });
 
-fs.watch(porterDir, async (event, file) => {
-    bundleName = path.basename(file, '.json');
-    const fullFile = path.resolve(porterDir, file)
-    if (fs.existsSync(fullFile)) {
-        contents = await readFile(fullFile)
-        porter[bundleName] = JSON.parse(contents.toString())
-    }
-    else {
-        delete porter[bundleName]
-    }
-})
+// fs.watch(porterDir, async (event, file) => {
+//     bundleName = path.basename(file, '.json');
+//     const fullFile = path.resolve(porterDir, file)
+//     if (fs.existsSync(fullFile)) {
+//         contents = await readFile(fullFile)
+//         porter[bundleName] = JSON.parse(contents.toString())
+//     }
+//     else {
+//         delete porter[bundleName]
+//     }
+// })
 
-router.use(express.static('public'));
 router.get('/', function (req, res, next) {
     res.json(porter);
 });
