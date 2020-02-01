@@ -1,9 +1,11 @@
 const chalk = require('chalk');
+const runExpress = require('./run');
 
 exports.runServer = (cmd) => {
   const port = cmd.port ? cmd.port : false;
-  console.log(chalk.cyan('Running the server...'));
-  console.log(chalk.green(`Port ${port?'provided: ' + port: 'not provided'}`))
+  // console.log(chalk.cyan('Running the server...'));
+  // console.log(chalk.green(`Port ${port?'provided: ' + port: 'not provided'}`))
+  runExpress(port?port:undefined);
 }
 
 exports.funMessage = (cmd) => {

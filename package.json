@@ -1,13 +1,17 @@
 {
   "name": "@moonraker/cli",
-  "version": "1.0.0",
+  "version": "0.0.6",
   "description": "CLI to install and run the express server REST API that ingests and processes the claims",
   "main": "bin/index.js",
   "bin": {
     "moonraker": "bin/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/bin/www",
     "run": "node bin/index run -p 3000"
   },
   "repository": {
@@ -30,6 +34,11 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
-    "didyoumean": "^1.2.1"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "didyoumean": "^1.2.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
   }
 }
