@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const runExpress = require('./run');
+const doSetup = require('./setup');
 
 exports.runServer = (cmd) => {
   const port = cmd.port ? cmd.port : false;
@@ -13,10 +14,11 @@ exports.funMessage = (cmd) => {
 }
 
 exports.setupFrontend = (cmd) => {
-  const filePath = cmd.filepath ? cmd.filepath : false;
-  console.log(`Setting up your visualization${filePath? ' for ' + filePath + '...': '...'}`)
+  // const filePath = cmd.filepath ? cmd.filepath : false;
+  // console.log(`Setting up your visualization${filePath? ' for ' + filePath + '...': '...'}`)
   //pull the front-end code from git
   //connect front-end with claims.json from local file path
+  doSetup();
 }
 
 exports.logo = () => {
