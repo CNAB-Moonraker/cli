@@ -105,3 +105,4 @@ dist
 
 # Mac DS_Store file
 .DS_Store
+.vscode/
