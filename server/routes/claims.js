@@ -5,38 +5,39 @@ const os = require('os');
 const path = require('path')
 const { promisify } = require('util')
 const readFile = promisify(fs.readFile);
-let porter = {};
+let response = {};
+let porterList = [];
+let duffleList = [];
 
-//TODO: Get docker cnabs
-//TODO: Get duffle cnabs
-//TODO: Get porter claims
+response['porter'] = {}
+response['duffle'] = {}
 
 const porterDir = path.resolve(os.homedir(), '.porter/claims')
+const duffleDir = path.resolve(os.homedir(), '.duffle/claims')
 
+// Read porter directory
 fs.readdir(porterDir, (err, data) => {
     if (err) throw err;
     data.forEach(async file => {
-        let bundleName = path.basename(file, '.json');
         let fullFile = path.resolve(porterDir, file)
         let contents = await readFile(fullFile)
-        porter[bundleName] = JSON.parse(contents.toString())
+        porterList.push(JSON.parse(contents.toString()))
+        response['porter'] = porterList
     });
 });
 
-// fs.watch(porterDir, async (event, file) => {
-//     bundleName = path.basename(file, '.json');
-//     const fullFile = path.resolve(porterDir, file)
-//     if (fs.existsSync(fullFile)) {
-//         contents = await readFile(fullFile)
-//         porter[bundleName] = JSON.parse(contents.toString())
-//     }
-//     else {
-//         delete porter[bundleName]
-//     }
-// })
+fs.readdir(duffleDir, (err, data) => {
+    if (err) throw err;
+    data.forEach(async file => {
+        let fullFile = path.resolve(duffleDir, file)
+        let contents = await readFile(fullFile)
+        duffleList.push(JSON.parse(contents.toString()))
+        response['duffle'] = duffleList
+    })
+});
 
 router.get('/', function (req, res, next) {
-    res.json(porter);
+    res.json(response);
 });
 
 module.exports = router;
