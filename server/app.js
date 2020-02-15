@@ -9,7 +9,6 @@ var claimsRouter = require('./routes/claims')
 
 var app = express();
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,7 +19,7 @@ app.use('/', indexRouter);
 app.use('/claims', claimsRouter);
 
 // catch any other request and send 404
-app.all('*',function (req, res, next) {
+app.all('*', function (req, res, next) {
   res.sendStatus(404);
 });
 
