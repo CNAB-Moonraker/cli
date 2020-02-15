@@ -6,11 +6,9 @@ const path = require('path')
 const { promisify } = require('util')
 const readFile = promisify(fs.readFile);
 let response = {};
-let porterList = [];
-let duffleList = [];
 
-response['porter'] = {}
-response['duffle'] = {}
+response['porter'] = []
+response['duffle'] = []
 
 const porterDir = path.resolve(os.homedir(), '.porter/claims')
 const duffleDir = path.resolve(os.homedir(), '.duffle/claims')
@@ -21,8 +19,7 @@ fs.readdir(porterDir, (err, data) => {
     data.forEach(async file => {
         let fullFile = path.resolve(porterDir, file)
         let contents = await readFile(fullFile)
-        porterList.push(JSON.parse(contents.toString()))
-        response['porter'] = porterList
+        response['porter'].push(JSON.parse(contents.toString()))
     });
 });
 
@@ -31,8 +28,7 @@ fs.readdir(duffleDir, (err, data) => {
     data.forEach(async file => {
         let fullFile = path.resolve(duffleDir, file)
         let contents = await readFile(fullFile)
-        duffleList.push(JSON.parse(contents.toString()))
-        response['duffle'] = duffleList
+        response['duffle'].push(JSON.parse(contents.toString()))
     })
 });
 
