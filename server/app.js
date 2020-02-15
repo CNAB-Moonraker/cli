@@ -29,7 +29,7 @@ app.use('/', indexRouter);
 app.use('/claims', claimsRouter);
 
 // catch any other request and send 404
-app.all('*',function (req, res, next) {
+app.all('*', function (req, res, next) {
   res.sendStatus(404);
 });
 
