@@ -10,10 +10,10 @@ var indexRouter = require('./routes/index');
 var claimsRouter = require('./routes/claims')
 
 var app = express();
-const moonrakerDir = path.resolve(os.homedir(), '.moonraker')
+const moonrakerDir = path.resolve(os.homedir(), '.moonraker');
 let webDistFolder = null;
 if (fs.existsSync(moonrakerDir)){
-  const data = fs.readFileSync(path.resolve(moonrakerDir, 'config.json'))
+  const data = fs.readFileSync(path.resolve(moonrakerDir, 'config.json'));
   webDistFolder = path.resolve(moonrakerDir, JSON.parse(data).webDistFolder);
 }
 

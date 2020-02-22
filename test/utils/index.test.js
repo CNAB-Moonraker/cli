@@ -1,28 +1,13 @@
+const assert = require('assert');
+const util = require('util');
+const {describe, it} = require('mocha');
+
 const chalk = require('chalk');
-const runExpress = require('./run');
-const doSetup = require('./setup');
+const sinon = require('sinon');
 
-exports.runServer = (cmd) => {
-  const port = cmd.port ? cmd.port : false;
-  // console.log(chalk.cyan('Running the server...'));
-  // console.log(chalk.green(`Port ${port?'provided: ' + port: 'not provided'}`))
-  runExpress(port?port:undefined);
-}
+const indexUtils = require('../../utils/index');
 
-exports.funMessage = (cmd) => {
-  console.log(chalk.red('Ahoy, matey! Welcome aboard.'))
-}
-
-exports.setupFrontend = (cmd) => {
-  // const filePath = cmd.filepath ? cmd.filepath : false;
-  // console.log(`Setting up your visualization${filePath? ' for ' + filePath + '...': '...'}`)
-  // pull the front-end code from git
-  // connect front-end with claims.json from local file path
-  doSetup();
-}
-
-exports.outputLogo = () => {
-console.log(chalk`
+const expectedLogo = chalk`
 {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
 {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}     {blue *}     {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
 {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}     {blue (((((((((((}     {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
@@ -56,5 +41,28 @@ console.log(chalk`
 {white @@@@@@@@@@@@@@@@@@@@@}   {blue /////////////////////////////////}   {white @@@@@@@@@@@@@@@@@@@@}
 {white @@@@@@@@@@@@@@@@@@@@@@}                                     {white @@@@@@@@@@@@@@@@@@@@@}
 {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
-`);
-}
+`;
+
+/**
+ * Test suite for utils/index.js
+ */
+describe('Test suite for utils/index.js', () => {
+
+    it('Verify console.log() output for logo', () => {
+
+        let messages = [];
+        sinon.stub(console, "log").callsFake((...args) => {
+            // Format the console message with any optional params to create a single
+            // log message.
+            const params = Array.prototype.slice.call(args, 1);
+            const message = params.length
+                ? util.format(args[0], ...params)
+                : args[0];
+            messages.push(message);
+        });
+
+        indexUtils.outputLogo();
+        assert.equal(messages[0], expectedLogo);
+        console.log.restore();
+    });
+});
