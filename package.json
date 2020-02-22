@@ -1,6 +1,6 @@
 {
   "name": "@moonraker/cli",
-  "version": "0.0.6",
+  "version": "0.0.8beta",
   "description": "CLI to install and run the express server REST API that ingests and processes the claims",
   "main": "bin/index.js",
   "bin": {
@@ -12,7 +12,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/bin/www",
-    "cli": "node --inspect bin/index"
+    "cli": "node bin/index"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,6 @@
     "didyoumean": "^1.2.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "nodegit": "^0.26.4"
+    "morgan": "~1.9.1"
   }
 }
