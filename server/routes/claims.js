@@ -18,7 +18,7 @@ const dockerappDir = path.resolve(os.homedir(), '.docker/app/installations/claim
 // Read porter directory
 fs.readdir(porterDir, (err, data) => {
     if (err) {
-        console.log("Porter is not installed.")
+        console.log("Porter claims not found.")
     }
     else {
         data.forEach(async file => {
