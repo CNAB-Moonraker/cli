@@ -1,6 +1,6 @@
 {
   "name": "@moonraker/cli",
-  "version": "0.0.8beta",
+  "version": "0.0.9beta",
   "description": "CLI to install and run the express server REST API that ingests and processes the claims",
   "main": "bin/index.js",
   "bin": {
