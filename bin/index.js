@@ -3,7 +3,7 @@
 const chalk = require('chalk');
 const didYouMean = require('didyoumean');
 const program = require('commander');
-const { logo, runServer, funMessage, setupFrontend } = require('../utils');
+const { outputLogo, runServer, funMessage, setupFrontend } = require('../utils');
 
 
 program
@@ -35,17 +35,17 @@ program
   .arguments('<command>')
   .action((cmd) => {
     program.outputHelp()
-    console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`))
-    console.log()
-    suggestCommands(cmd)
+    console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`));
+    console.log();
+    suggestCommands(cmd);
   })
 
-program.parse(process.argv)
+program.parse(process.argv);
 
 // Output help command if no command given
 if (!process.argv.slice(2).length) {
-  logo()
-  program.outputHelp()
+  outputLogo();
+  program.outputHelp();
 }
 
 function suggestCommands (unknownCommand) {
