@@ -1,57 +1,71 @@
-const { spawn } = require("child_process");
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
+const { spawn } = require("child_process")
+const path = require('path')
+const os = require('os')
+const fs = require('fs')
 const moonrakerDir = path.resolve(os.homedir(), '.moonraker')
 const webDir = path.resolve(moonrakerDir, 'web')
+// const staticDir = path.resolve(__dirname, '../server/static')
+// const readline = require('readline')
+// const rl = readline.createInterface(process.stdin, process.stdout)
+// const ncp = require('ncp')
 
 function setup() {
-  if (!fs.existsSync(moonrakerDir)){
+  if (!fs.existsSync(moonrakerDir)) {
     console.log('Creating .moonraker')
-    fs.mkdirSync(moonrakerDir);
+    fs.mkdirSync(moonrakerDir)
     // create config file, set webDistFolder to front-end build folder
     const data = JSON.stringify({
       "webDistFolder": "web/dist"
     })
-    console.log('Creating config.json');
-    fs.writeFileSync(path.resolve(moonrakerDir, 'config.json'), data);
+    console.log('Creating config.json')
+    fs.writeFileSync(path.resolve(moonrakerDir, 'config.json'), data)
   }
 
-  if (!fs.existsSync(webDir)){
+  if (!fs.existsSync(webDir)) {
     console.log('Cloning Dashboard...')
     // Git.Clone("https://github.com/CNAB-Moonraker/dashboard-vue", webDir)
     // .then((repository) => {
     //   console.log("Installing Dashboard Dependencies...")
-    
-    const clone = spawn("git", ["clone", "https://github.com/CNAB-Moonraker/dashboard-vue", webDir], {cwd: moonrakerDir})
+
+    const clone = spawn("git", ["clone", "https://github.com/CNAB-Moonraker/dashboard-vue", webDir], { cwd: moonrakerDir })
     clone.on("close", code => {
-      if(code ===0) {
+      if (code === 0) {
         console.log('Clone complete.')
         console.log('Installing dashboard dependencies...')
-        const install = spawn("npm", ["install"], {cwd: webDir})
+
+        const install = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ["i"], { cwd: webDir })
+
+        install.stdout.setEncoding(`utf8`)
+        install.stdout.on('data', console.log)
+
         install.on('error', (error) => {
-          console.log(`Error: ${error.message}`);
-        });
-            
+          console.error(`Error: ${error.message}`)
+        })
+
         install.on("close", code => {
-          // console.log('Install complete.')
           if (code === 0) {
             console.log("Dashboard Dependency Install Complete")
             console.log("Building Dashboard...")
-            const build = spawn("npm", ["run", "build"], {cwd: webDir})
+            const build = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ["run", "build"], { cwd: webDir })
+
+            build.stdout.setEncoding(`utf8`)
+            build.stdout.on('data', console.log)
+
             build.on('error', (error) => {
-              console.log(`Error: ${error.message}`);
-            });
-            
+              console.log(`Error: ${error.message}`)
+            })
+
             build.on("close", code => {
-              if(code === 0) {
+              if (code === 0) {
+                console.clear()
                 console.log("Dashboard Build Complete")
+                console.log(`Moonraker Dashboard is ready to serve using the command: \`moonraker run\``)
               }
-            });
+            })
           }
-        });
+        })
       }
-    });
+    })
   }
 }
 

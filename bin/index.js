@@ -14,6 +14,7 @@ program
 program
   .command('run')
   .option('-p, --port <port>', 'Optional Port Parameter - Defaults to 3002')
+  .option('-d, --dashboard', 'Run Dashboard along-side the API')
   .action(runServer)
 
 //program command setup
