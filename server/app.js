@@ -25,7 +25,7 @@ if(webDistFolder !== null) {
   app.use(express.static(webDistFolder));
 }
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/claims', claimsRouter);
 
 // catch any other request and send 404

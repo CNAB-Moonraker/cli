@@ -15,7 +15,21 @@ function setup() {
     fs.mkdirSync(moonrakerDir)
     // create config file, set webDistFolder to front-end build folder
     const data = JSON.stringify({
-      "webDistFolder": "web/dist"
+      "webDistFolder": "web/dist",
+      "resources": [
+        {
+          "name": "porter",
+          "claims_location": "~/.porter/claims"
+        },
+        {
+          "name": "duffle",
+          "claims_location": "~/.duffle/claims"
+        },
+        {
+          "name": "docker-app",
+          "claims_location": "~/.docker/app/installations/claims"
+        }
+      ]
     })
     console.log('Creating config.json')
     fs.writeFileSync(path.resolve(moonrakerDir, 'config.json'), data)
