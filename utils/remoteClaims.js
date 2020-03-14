@@ -53,8 +53,4 @@ async function streamToString(readableStream) {
   });
 }
 
-getClaims().then(claims => console.log(claims)).catch((err) => {
-  console.error("Error running sample:", err.message);
-});
-
 module.exports = {getClaims}
