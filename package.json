@@ -1,6 +1,6 @@
 {
   "name": "@moonraker/cli",
-  "version": "0.0.9beta",
+  "version": "1.0.1beta",
   "description": "CLI to install and run the express server REST API that ingests and processes the claims",
   "main": "bin/index.js",
   "bin": {
@@ -32,11 +32,13 @@
   },
   "homepage": "https://github.com/CNAB-Moonraker/cli#readme",
   "dependencies": {
+    "@azure/storage-blob": "^12.1.1",
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "didyoumean": "^1.2.1",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"

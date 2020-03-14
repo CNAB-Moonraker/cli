@@ -14,16 +14,13 @@ program
 program
   .command('run')
   .option('-p, --port <port>', 'Optional Port Parameter - Defaults to 3002')
+  .option('-r, --remote', 'Access claims stored using the Azure storage plugin for Porter')
   .option('-d, --dashboard', 'Run Dashboard along-side the API')
   .action(runServer)
 
 //program command setup
 program
   .command('setup')
-  .option('-l, --filepath <filepath>', 'Define the local filepath to show local visualization')
-  //this option not working yet, but is for future use once we integrate the cloud bundle
-  //FIX ME:
-  //.option('.c', 'Get your visualization from bundles installed across multiple devices (cloud)')
   .action(setupFrontend)
 
 //for fun :)

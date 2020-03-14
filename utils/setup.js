@@ -4,18 +4,29 @@ const os = require('os')
 const fs = require('fs')
 const moonrakerDir = path.resolve(os.homedir(), '.moonraker')
 const webDir = path.resolve(moonrakerDir, 'web')
-// const staticDir = path.resolve(__dirname, '../server/static')
-// const readline = require('readline')
-// const rl = readline.createInterface(process.stdin, process.stdout)
-// const ncp = require('ncp')
+
 
 function setup() {
   if (!fs.existsSync(moonrakerDir)) {
     console.log('Creating .moonraker')
     fs.mkdirSync(moonrakerDir)
-    // create config file, set webDistFolder to front-end build folder
+
     const data = JSON.stringify({
-      "webDistFolder": "web/dist"
+      "webDistFolder": "web/dist",
+      "resources": [
+        {
+          "name": "porter",
+          "claims_location": "~/.porter/claims"
+        },
+        {
+          "name": "duffle",
+          "claims_location": "~/.duffle/claims"
+        },
+        {
+          "name": "docker-app",
+          "claims_location": "~/.docker/app/installations/claims"
+        }
+      ]
     })
     console.log('Creating config.json')
     fs.writeFileSync(path.resolve(moonrakerDir, 'config.json'), data)
@@ -23,15 +34,13 @@ function setup() {
 
   if (!fs.existsSync(webDir)) {
     console.log('Cloning Dashboard...')
-    // Git.Clone("https://github.com/CNAB-Moonraker/dashboard-vue", webDir)
-    // .then((repository) => {
-    //   console.log("Installing Dashboard Dependencies...")
 
     const clone = spawn("git", ["clone", "https://github.com/CNAB-Moonraker/dashboard-vue", webDir], { cwd: moonrakerDir })
     clone.on("close", code => {
       if (code === 0) {
         console.log('Clone complete.')
         console.log('Installing dashboard dependencies...')
+        //TODO: Add some sort of buffer signal in the CLI 
 
         const install = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ["i"], { cwd: webDir })
 
