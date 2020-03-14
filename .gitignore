@@ -109,3 +109,6 @@ dist
 .idea/
 
 server/static/**/*
+
+# cnab-examples
+cnab-examples/
