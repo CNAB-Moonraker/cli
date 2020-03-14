@@ -37,15 +37,13 @@ function setup() {
 
   if (!fs.existsSync(webDir)) {
     console.log('Cloning Dashboard...')
-    // Git.Clone("https://github.com/CNAB-Moonraker/dashboard-vue", webDir)
-    // .then((repository) => {
-    //   console.log("Installing Dashboard Dependencies...")
 
     const clone = spawn("git", ["clone", "https://github.com/CNAB-Moonraker/dashboard-vue", webDir], { cwd: moonrakerDir })
     clone.on("close", code => {
       if (code === 0) {
         console.log('Clone complete.')
         console.log('Installing dashboard dependencies...')
+        //TODO: Add some sort of buffer signal in the CLI 
 
         const install = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ["i"], { cwd: webDir })
 

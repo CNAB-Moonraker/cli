@@ -48,7 +48,7 @@ async function getClaims() {
         }
     
       });
-      return data;
+    return data;
 }
 
 

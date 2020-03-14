@@ -13,7 +13,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/v2', async (req, res, next) => {
-
+    
 });
 
 module.exports = router;

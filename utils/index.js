@@ -4,8 +4,6 @@ const doSetup = require('./setup');
 
 exports.runServer = (cmd) => {
   const port = cmd.port ? cmd.port : false;
-  // console.log(chalk.cyan('Running the server...'));
-  // console.log(chalk.green(`Port ${port?'provided: ' + port: 'not provided'}`))
   runExpress(port?port:undefined);
 }
 
@@ -14,21 +12,10 @@ exports.funMessage = (cmd) => {
 }
 
 exports.setupFrontend = (cmd) => {
-  // const filePath = cmd.filepath ? cmd.filepath : false;
-  // console.log(`Setting up your visualization${filePath? ' for ' + filePath + '...': '...'}`)
-  // pull the front-end code from git
-  // connect front-end with claims.json from local file path
   doSetup();
 }
 
 exports.outputLogo = () => {
-
-	// console.log(chalk.green(`╔═══════════════════════════════════╗`))
-	// console.log(chalk.green(`║                                   ║`))
-	// console.log(chalk.green(`║   ${chalk.bold.white(`Moonraker API`)}                   ║`))
-	// console.log(chalk.green(`║                                   ║`))
-	// console.log(chalk.green(`╚═══════════════════════════════════╝`))
-
   console.log(chalk`
   {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
   {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}     {blue *}     {white @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@}
@@ -48,8 +35,8 @@ exports.outputLogo = () => {
   {white @@@}   {blue ((((((((((((((((((}                             {blue ((((((((((((((((((((((}   {white @@}
   {white @@@}  {blue (((((((((((((((((}                               {blue (((((((((((((((((((((((}  {white @@}
   {white @@}   {blue ((((((((((((((((}                               {blue ((((((((((((((((((((((((}   {white @}
-  {white @@}  {blue ((((((((((((((((}              PROJECT           {blue (((((((((((((((((((((((((}  {white @}
-  {white @}  {blue /(((((((((((((((}              MOONRAKER          {blue (((((((((((((((((((((((((/} {white @}
+  {white @@}  {blue ((((((((((((((((}                                {blue (((((((((((((((((((((((((}  {white @}
+  {white @}  {blue /(((((((((((((((}                                 {blue (((((((((((((((((((((((((/} {white @}
   {white @}   {blue (((((((((((((((}                                  {blue ((((((((((((((((((((((((}  {white @}
   {white @@@}   {blue (((((((((((((}                                   {blue (((((((((((((((((((((}   {white @@}
   {white @@@@@}   {blue ((((((((((((}                                   {blue ,(((((((((((((((((}   {white @@@@}

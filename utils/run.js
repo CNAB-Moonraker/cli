@@ -97,7 +97,9 @@ function onListening() {
 }
 module.exports = run
 
-
+/**
+ *
+ */
 function serveDash() {
   const serve = spawn(/^win/.test(process.platform) ? 'serve.cmd' : 'serve', ["-s", "dist"], { cwd: webDir })
 
