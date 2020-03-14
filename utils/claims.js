@@ -29,27 +29,28 @@ async function getLocalClaims(directory, resource) {
     } catch (error) {
       console.log(`Could not find claims for resource: ${resource}`)
     }
-    
-    return claims;
+
+    return {resource, claims};
 }
 
 
 async function getClaims() {
   const data = {};
-    await resources.forEach(async resource => {
+    let promises = [];
+    resources.forEach( (resource) => {
         let resourceName = resource["name"];
         let resourcePath = resource["claims_location"];
         let resourceFullPath = resourcePath.replace('~',os.homedir())
-        try {
-            data[resourceName] = await getLocalClaims(resourceFullPath, resourceName);
-        } catch (error) {
-            console.error(error);
-            data[resourceName] = `Unable to retrieve ${resourceName} claims.`;
-        }
-    
-      });
+            promises.push(getLocalClaims(resourceFullPath, resourceName));
+    })
+    const result = await Promise.all(promises);
+    return result.reduce((acc, curr) => {
+        acc[curr.resource] = curr.claims;
+        return acc;
+    },{})
+
     return data;
-}
+};
 
 
 module.exports = {

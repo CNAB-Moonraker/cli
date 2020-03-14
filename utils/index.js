@@ -4,7 +4,8 @@ const doSetup = require('./setup');
 
 exports.runServer = (cmd) => {
   const port = cmd.port ? cmd.port : false;
-  runExpress(port?port:undefined);
+  const useAzureStorage = cmd.remote ? cmd.remote : false;
+  runExpress({port: port?port:undefined, useAzure: useAzureStorage});
 }
 
 exports.funMessage = (cmd) => {
