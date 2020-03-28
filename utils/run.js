@@ -15,7 +15,7 @@ const webDir = path.resolve(moonrakerDir, 'web')
 /**
  * Listen on provided port, on all network interfaces.
  */
-function run({port:givenPort, useAzure}) {
+function run({ port: givenPort, useAzure }) {
   process.env.USE_AZURE = useAzure;
   var app = require('../server/app')
   var http = require('http')
@@ -85,6 +85,6 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  console.log('API live on ' + bind)
+  console.log('Moonraker live on ' + bind)
 }
 module.exports = run
