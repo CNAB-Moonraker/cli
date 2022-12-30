@@ -44,7 +44,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "sinon": "^9.0.0",
     "supertest": "^4.0.2"
   }
